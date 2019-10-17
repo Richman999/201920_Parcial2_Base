@@ -19,17 +19,22 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private bool instantiateHumanPlayer = true;
 
+
+    int humanPlayer = Random.Range(1,5);
+
+
     private Dictionary<string, int> taggedScore = new Dictionary<string, int>();
 
     public string GetWinner()
     {
+        
         return string.Empty;
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        onTaggedChange += UpdateTaggedScore;
+
 
         taggedScore.Clear();
 
@@ -41,8 +46,9 @@ public class GameController : MonoBehaviour
             playerInstance.name = string.Format("Player{0}", i + 1);
 
             taggedScore.Add(playerInstance.name, 0);
-        }
 
+        }
+        SelecHumanPlayer(humanPlayer);
         Invoke("EndGame", playTime);
     }
 
@@ -54,5 +60,9 @@ public class GameController : MonoBehaviour
     private void UpdateTaggedScore(string newTaggedPlayer)
     {
         taggedScore[newTaggedPlayer] += 1;
+    }
+    private void SelecHumanPlayer(int playerHuman)
+    {
+        taggedScore["Player{0}", playerHuman];
     }
 }
