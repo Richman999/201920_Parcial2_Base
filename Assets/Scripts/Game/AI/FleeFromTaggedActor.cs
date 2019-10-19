@@ -1,9 +1,10 @@
 ﻿using AI;
+using UnityEngine;
 
 public class FleeFromTaggedActor : Node
 {
     public override void Execute()
     {
-        throw new System.NotImplementedException();
+        Debug.Log(gameObject.name  + "FleeFromTaggdActor ok");
     }
 }

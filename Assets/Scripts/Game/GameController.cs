@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     private bool instantiateHumanPlayer = true;
 
 
-    int humanPlayer = Random.Range(1,5);
+    private int targetPlayer;
 
 
     private Dictionary<string, int> taggedScore = new Dictionary<string, int>();
@@ -31,24 +31,24 @@ public class GameController : MonoBehaviour
         return string.Empty;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
-
-
-        taggedScore.Clear();
-
+        targetPlayer = Random.Range(1, 5);
         for (int i = 0; i < playerCount; i++)
         {
             string prefabPath = i == 0 && instantiateHumanPlayer ? "HumanPlayer" : "AIPlayer";
 
-            GameObject playerInstance = Instantiate(Resources.Load<GameObject>(prefabPath));
+            GameObject playerInstance = Instantiate(Resources.Load<GameObject>(prefabPath), new Vector3(i+i,0f,0f), Quaternion.identity);
             playerInstance.name = string.Format("Player{0}", i + 1);
 
             taggedScore.Add(playerInstance.name, 0);
-
+            playerInstance.GetComponent<PlayerController>().eventoOnTagge += UpdateTaggedScore;
+            if (i == targetPlayer)
+            {
+                playerInstance.GetComponent<PlayerController>().IsTagged = true;
+            }
         }
-        SelecHumanPlayer(humanPlayer);
+
         Invoke("EndGame", playTime);
     }
 
@@ -61,8 +61,6 @@ public class GameController : MonoBehaviour
     {
         taggedScore[newTaggedPlayer] += 1;
     }
-    private void SelecHumanPlayer(int playerHuman)
-    {
-        taggedScore["Player{0}", playerHuman];
-    }
+
+
 }

@@ -1,9 +1,12 @@
 ﻿using AI;
+using UnityEngine;
 
-public class IsActorTagged : Selector
+public class IsActorTagged : SelectWithOption
 {
-    protected override bool Check()
+
+    public override bool Check()
     {
-        throw new System.NotImplementedException();
+        bool value = gameObject.GetComponent<PlayerController>().IsTagged;
+        return value;
     }
 }

@@ -1,9 +1,12 @@
 ﻿using AI;
+using UnityEngine;
 
-public class IsTaggedActorNear : Selector
+public class IsTaggedActorNear : SelectWithOption
 {
-    protected override bool Check()
+    [SerializeField] private bool areyouok;
+    public override bool Check()
     {
-        throw new System.NotImplementedException();
+        Debug.Log(gameObject.name + "IsTaggedActorNear ok");
+        return areyouok;
     }
 }
